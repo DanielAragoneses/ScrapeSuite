@@ -109,7 +109,8 @@ class WallapopScraper(BaseScraper):
         if sf.latitude is not None and sf.longitude is not None:
             params["latitude"] = str(sf.latitude)
             params["longitude"] = str(sf.longitude)
-
+            if sf.max_distance_km is not None and sf.max_distance_km > 0:
+                params["distance"] = str(int(sf.max_distance_km * 1000))
         resp = self.safe_get(self.ENDPOINT, params=params, headers=self.WALLAPOP_HEADERS)
         if not resp or resp.status_code != 200:
             logger.warning(f"[{self.platform.value}] Wallapop API failed: status {resp.status_code if resp else 'None'}")
