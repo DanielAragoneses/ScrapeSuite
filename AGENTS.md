@@ -224,6 +224,19 @@ The Spain Legalization Breakdown must explicitly itemize:
 8. **RHD Lighting Adaptation (if applicable):** If the vehicle is Right-Hand Drive, beam pattern replacement/adjustment and rear fog light relocation to pass Spanish ITV (250.00 €).
 9. **Total Landed & Legal Cost in Spain:** Grand total combining base vehicle purchase price + all legalization, registration, and logistics costs.
 
+### 3.7 Mandatory Secondary Market Arbitrage & Resale Protocol
+When an agent is instructed to find arbitrage, flipping, or resale opportunities, it must abide by these strict economic and forensic invariants:
+1. **The Zero-Fee Fallacy is Prohibited:** An agent must NEVER equate gross spread to net profit. Real-world resale must deduct:
+   * **Platform & Payment Fees:** eBay (~13.5%), Reverb (~8.5%).
+   * **Inbound Acquisition Shipping:** Cost to acquire the item from seller.
+   * **Outbound Insured Courier & Packaging:** Tiered by fragility and weight (Light optics/mic: 12.00 €, Medium gear/scopes: 22.00 €, Heavy vintage audio: 35.00 €, Bulky crate: 55.00 €).
+   * **Refurbishment Consumables:** Contact cleaner (DeoxIT), replacement drive belts, batteries, adapters.
+   $$\text{True Net Profit} = \text{Realized Resale} - \text{Buy Price} - \text{Platform Fees} - \text{Packaging \& Courier} - \text{Refurb Cost}$$
+2. **Condition-Adjusted Realized Pricing:** NEVER quote top-of-market "serviced dealer / recapped / warranty" prices for unrestored private listings. Always price for the actual unrestored/used condition described.
+3. **Legacy Tech Obsolescence Filter:** Strictly reject outdated digital test equipment (e.g., Tektronix TDS 200/1000 monochrome series, legacy Siglent CNL) that competes unfavorably with modern entry-level 12-bit instruments (Rigol DHO800, Siglent X-E at ~300 €–360 € new with warranty).
+4. **Counterfeit & Component Degradation Risk:** Flag or discard counterfeit-prone studio gear (Neumann TLM 103 replicas) and items with acoustic foam rot (vintage EV RE20).
+5. **Asymmetric Margin of Safety:** Only recommend opportunities that maintain a True Net Profit $\ge 90.00\text{ €}$ and True ROI $\ge 40\%$ (or high multiplier on low capital) after all deductions.
+
 ---
 
 ## 4. Package Quickstart & CLI Commands
