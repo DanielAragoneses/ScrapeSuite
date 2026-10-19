@@ -56,6 +56,41 @@ class TestScrapeSuite(unittest.TestCase):
         self.assertIn(1.0, PLACEHOLDER_PRICES)
         self.assertTrue(any("precio no es el del anuncio" in p for p in BAIT_PHRASES))
 
+    def test_reserved_flag_parsing(self):
+        """API returns {"reserved": {"flag": bool}}; both states must map through."""
+        payload = {
+            "data": {"section": {"items": [
+                {
+                    "id": "reserved1", "title": "Reserved board", "description": "",
+                    "price": {"amount": 30.0, "currency": "EUR"},
+                    "reserved": {"flag": True}, "web_slug": "reserved-board-1",
+                    "location": {"city": "Madrid", "region": "Madrid",
+                                 "latitude": 40.4, "longitude": -3.7},
+                    "shipping": {"item_is_shippable": True, "user_allows_shipping": True},
+                },
+                {
+                    "id": "free1", "title": "Available board", "description": "",
+                    "price": {"amount": 30.0, "currency": "EUR"},
+                    "reserved": {"flag": False}, "web_slug": "available-board-1",
+                    "location": {"city": "Madrid", "region": "Madrid",
+                                 "latitude": 40.4, "longitude": -3.7},
+                    "shipping": {"item_is_shippable": True, "user_allows_shipping": True},
+                },
+            ]}},
+        }
+
+        class _Resp:
+            status_code = 200
+            def json(self):
+                return payload
+
+        scraper = WallapopScraper()
+        scraper.safe_get = lambda *a, **kw: _Resp()
+        results = scraper.search("teclado mecanico")
+        by_id = {item.id: item for item in results}
+        self.assertIs(by_id["reserved1"].is_reserved, True)
+        self.assertIs(by_id["free1"].is_reserved, False)
+
 
 if __name__ == "__main__":
     unittest.main()

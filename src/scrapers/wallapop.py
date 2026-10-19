@@ -162,11 +162,13 @@ class WallapopScraper(BaseScraper):
             if sf.min_price is not None and price < sf.min_price:
                 continue
 
-            # Reservation status
-            flags = it.get("flags", {})
+            # Reservation status (API shape: {"reserved": {"flag": bool}})
+            reserved_info = it.get("reserved")
             is_reserved = False
-            if isinstance(flags, dict):
-                is_reserved = bool(flags.get("reserved", False))
+            if isinstance(reserved_info, dict):
+                is_reserved = bool(reserved_info.get("flag", False))
+            elif isinstance(reserved_info, bool):
+                is_reserved = reserved_info
 
             # Location and distance
             loc = it.get("location")
